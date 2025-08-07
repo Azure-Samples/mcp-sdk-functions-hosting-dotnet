@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 
-name: mcp-server-azd
+name: dotnet-mcp-sdk-functions-azd
 metadata:
-  template: mcp-server-azd@1.0.1
+  template: dotnet-mcp-sdk-functions-azd@1.0.1
 services:
   mcp:
     project: .
