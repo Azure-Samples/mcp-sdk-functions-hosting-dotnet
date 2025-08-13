@@ -66,7 +66,7 @@ Try out the experimental [Azure Functions MCP server deployment helper](https://
     ```
     This file is where all the environment variables are kept. 
 
-1. Create a `.azurefunctions` directory in the root with file *empty.txt*. This is required today for successful deployment. 
+1. Create a `.azurefunctions` directory in the root with file *required.txt*. This is required today for successful deployment. 
 
 1. Modify the MCP server code to listen for HTTP requests on the port specified by the `FUNCTIONS_CUSTOMHANDLER_PORT` environment variable. This is the only line of code that needs modification:
 
