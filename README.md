@@ -41,6 +41,9 @@ Ensure you have the following installed:
 1. Click on the Copilot icon at the top and change to _Agent_ mode in the question window. 
 1. Ask "What is the weather in NYC?" Copilot should call the weather tools to help answer this question. 
 
+> [!NOTE]
+> You may see logs saying `Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://127.0.0.1:63164/, Response status code: 404`. This is expected and does not affect the running server. 
+
 ### Deploy 
 
 In the root directory, and run `azd up`. This command will create and deploy the app, plus other required resources. 
