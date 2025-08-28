@@ -115,12 +115,8 @@ When you're done working with your server, you can use this command to delete th
 | Python | [mcp-sdk-functions-hosting-python](https://github.com/Azure-Samples/mcp-sdk-functions-hosting-python) |
 | Node | [mcp-sdk-functions-hosting-node](https://github.com/Azure-Samples/mcp-sdk-functions-hosting-node) |
 
-### Bring-your-own MCP server
-
-If you've already built an MCP server, follow the instructions in the document [Host bring-your-own (BYO) MCP servers on Azure Functions
-](https://github.com/Azure-Samples/mcp-sdk-functions-hosting-dotnet/blob/main/BYOServer.md). 
-
 ## Troubleshooting 
+
 The following are some common issues that come up. 
 
 1. **InternalServerError: There was an unexpected InternalServerError. Please try again later.**
