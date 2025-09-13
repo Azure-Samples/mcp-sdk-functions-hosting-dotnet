@@ -12,6 +12,6 @@
             "arguments": ["QuickstartWeatherServer.dll"]
         },
         "enableForwardingHttpRequest": true,
-        "enableHttpProxyingRequest": true
+        "enableProxyingHttpRequest": true
     }
 }
