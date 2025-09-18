@@ -11,6 +11,6 @@
             "workingDirectory": "",
             "arguments": ["QuickstartWeatherServer.dll"]
         },
-        "enableHttpProxyingRequest": true
+        "enableProxyingHttpRequest": true
     }
 }
