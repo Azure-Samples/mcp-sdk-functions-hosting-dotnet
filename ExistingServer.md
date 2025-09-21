@@ -8,7 +8,7 @@ The guidance below uses the following:
 * [Visual Studio Code](https://code.visualstudio.com/) 
 
 ## Approach 1: Use experimental prompt
-Try out the experimental [Azure Functions MCP server deployment helper](https://aka.ms/mcp-deployment-helper) to have VSCode's Copilot prepare your server for custom handler deployment. The deployment helpder contains a custom prompt that provides Copilot instructions. 
+Try out the experimental [Azure Functions MCP server deployment helper](https://aka.ms/mcp-deployment-helper) to have VSCode's Copilot prepare your server for custom handler deployment. The deployment helper contains a custom prompt that provides Copilot instructions. 
 
 ## Approach 2: Manually add required artifacts 
 1. In the root directory of your MCP server project, create a `host.json` with the following:
