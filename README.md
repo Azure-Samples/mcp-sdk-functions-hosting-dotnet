@@ -66,7 +66,7 @@ Clone the repo and open the sample in Visual Studio Code
 
 ## Test the server locally
 >[!NOTE]
->Oct 31 2025 update: Running the server locally requires Azure Functions Core Tools v4.5.0, which is not yet released. Skip to [next section](#register-resource-provider-before-deploying) to prepare for deployment.
+>Oct 31 2024 update: Running the server locally requires Azure Functions Core Tools v4.5.0, which is not yet released. Skip to [next section](#register-resource-provider-before-deploying) to prepare for deployment.
 
 1. In the root directory, run `dotnet build && func start` to build the project and start the server locally
 1. Open _mcp.json_ (in the _.vscode_ directory)
