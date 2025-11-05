@@ -23,6 +23,8 @@ param tokenExchangeAudience string = ''
   'eastasia'
   'northeurope'
   'westus2'
+  'eastus'
+  'northcentralus'
 ])
 @metadata({
   azd: {
