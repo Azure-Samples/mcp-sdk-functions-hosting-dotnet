@@ -7,8 +7,7 @@ using System.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("FUNCTIONS_CUSTOMHANDLER_PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
 builder.Services.AddMcpServer()
     .WithHttpTransport((options) =>
