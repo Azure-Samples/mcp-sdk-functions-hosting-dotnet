@@ -44,7 +44,7 @@ Once you've done the necessary renaming, follow these steps:
     - Files present both locally and in template: Likely the only one is README, and you can keep the existing. 
     - Enter a unique environment name: This will become the name of the resource group the server is deployed in.
 1. In `host.json`:
-    - Ensure the argument's property the compiled DLL path, e.g. `HelloWorld.dll`
+    - Ensure the argument's property has the compiled DLL path, e.g. `HelloWorld.dll`
     - Ensure the `port` value is the same as the one used by the MCP server
 1. Follow instructions starting in the [Test the server locally](#test-the-server-locally) section. 
 
