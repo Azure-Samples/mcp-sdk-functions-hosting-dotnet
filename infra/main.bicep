@@ -47,7 +47,7 @@ param tokenExchangeAudience string = ''
   'uaenorth'
   'uksouth'
   'ukwest'
-  'westcentralus'
+  //'westcentralus' //No app insights
   'westeurope'
   'westus'
   'westus2'
@@ -121,7 +121,7 @@ module entraApp 'app/entra.bicep' = {
   scope: rg
   params: {
     appUniqueName: '${functionAppName}-app'
-    appDisplayName: 'MCP Authorization App'
+    appDisplayName: 'MCP Authorization App (${functionAppName})'
     serviceManagementReference: serviceManagementReference
     functionAppHostname: '${functionAppName}.azurewebsites.net'
     preAuthorizedClientIds: preAuthorizedClientIdsArray
