@@ -14,12 +14,15 @@ builder.Services.AddMcpServer()
     {
         options.Stateless = true;
     })
-    .WithTools<WeatherTools>();
+    .WithTools<WeatherTools>()
+    .WithTools<UserInfoTools>();
 
 builder.Logging.AddConsole(options =>
 {
     options.LogToStandardErrorThreshold = LogLevel.Trace;
 });
+
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSingleton(_ =>
 {
@@ -32,6 +35,12 @@ var app = builder.Build();
 
 // Add health check endpoint
 app.MapGet("/api/healthz", () => "Healthy");
+
+// Add authcomplete endpoint
+app.MapGet("/authcomplete", () => Results.Content(
+    File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "authcomplete.html")),
+    "text/html"
+));
 
 // Map MCP endpoints
 app.MapMcp(pattern: "/mcp");

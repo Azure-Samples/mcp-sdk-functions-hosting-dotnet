@@ -59,10 +59,8 @@ Clone the repo and open the sample in Visual Studio Code
   ```
 
 ## Test the server locally
->[!NOTE]
->Oct 31 2025 update: Running the server locally requires Azure Functions Core Tools v4.5.0, which is in the process of releasing. Skip to [next section](#register-resource-provider-before-deploying) to prepare for deployment for now.  
 
-1. In the root directory, run `func start` to build the project and start the server locally
+1. In the root directory, run `dotnet build` then `dotnet run` to start the server locally
 1. Open _mcp.json_ (in the _.vscode_ directory)
 1. Start the server by selecting the _Start_ button above the **local-mcp-server**
 1. Click on the Copilot icon at the top to open chat (or `Ctrl+Command+I / Ctrl+Alt+I`), and then change to _Agent_ mode in the question window.
