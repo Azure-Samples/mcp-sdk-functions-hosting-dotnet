@@ -119,11 +119,9 @@ public sealed class UserInfoTools
                 user = new
                 {
                     displayName = user.GetProperty("displayName").GetString(),
-                    givenName = user.TryGetProperty("givenName", out var gn) ? gn.GetString() : null,
-                    surname = user.TryGetProperty("surname", out var sn) ? sn.GetString() : null,
-                    userPrincipalName = user.TryGetProperty("userPrincipalName", out var upn) ? upn.GetString() : null,
+                    userPrincipalName = user.TryGetProperty("userPrincipalName", out var upn) ? "[MASKED]" : null,
                     mail = user.TryGetProperty("mail", out var m) ? "[MASKED]" : null,
-                    id = "[MASKED]",
+                    id = user.TryGetProperty("id", out var userId) ? userId.GetString() : null,
                     businessPhones = user.TryGetProperty("businessPhones", out var bp) 
                         ? bp.EnumerateArray().Select(_ => "[MASKED]").ToArray() 
                         : Array.Empty<string>()
