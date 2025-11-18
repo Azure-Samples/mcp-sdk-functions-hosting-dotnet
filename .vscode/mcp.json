@@ -1,7 +1,7 @@
 {
 	    "servers": {
         "local-mcp-server": {
-            "url": "http://0.0.0.0:8080/mcp",
+            "url": "http://localhost:7071/mcp",
 			"type": "http"
         },
         "remote-mcp-server": {

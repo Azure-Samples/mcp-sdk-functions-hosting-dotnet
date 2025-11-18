@@ -60,14 +60,14 @@ Clone the repo and open the sample in Visual Studio Code
 
 ## Test the server locally
 
-1. In the root directory, run `dotnet build` then `dotnet run` to start the server locally
+1. In the root directory, run `func start` to start the server locally
 1. Open _mcp.json_ (in the _.vscode_ directory)
 1. Start the server by selecting the _Start_ button above the **local-mcp-server**
 1. Click on the Copilot icon at the top to open chat (or `Ctrl+Command+I / Ctrl+Alt+I`), and then change to _Agent_ mode in the question window.
 1. Click the tools icon and make sure **local-mcp-server** is checked for Copilot to use in the chat:
    
     <img src="./media/mcp-tools.png" width="200" alt="MCP tools list screenshot">
-1. Once the server displays the number of tools available, ask "What is the weather in NYC?" Copilot should call one of the weather tools to help answer this question.
+1. Once the server displays the number of tools available, ask "Return the weather in NYC using #local-mcp-server" Copilot should call one of the weather tools to help answer this question.
 
 ## Register resource provider before deploying
 
@@ -120,7 +120,7 @@ az provider show -n Microsoft.App
 1. Visual Studio Code will prompt you for the Function App domain. Copy it from either the terminal output or the Portal.
 1. Open Copilot in Agent mode and make sure **remote-mcp-server** is checked in the tool's list.
 1. VS Code should prompt you to authenticate to Microsoft. Click _Allow_, and then login into your Microsoft account (the one used to access Azure Portal).
-1. Ask Copilot "What is the weather in Seattle?". It should call one of the weather tools to help answer.
+1. Ask Copilot "Return the weather in Seattle using #remote-mcp-server". It should call one of the weather tools to help answer.
 
 >[!TIP]
 >In addition to starting an MCP server in _mcp.json_, you can see output of a server by clicking _More..._ -> _Show Output_. The output provides useful information like why a connection might've failed.
@@ -128,6 +128,21 @@ az provider show -n Microsoft.App
 >You can also click the gear icon to change log levels to "Traces" to get even more details on the interactions between the client (Visual Studio Code) and the server.
 >
 ><img src="./media/log-level.png" width="200" alt="Log level screenshot">
+
+## Demonstrating On-Behalf-Of (OBO) Flow
+The `UserInfoTools.cs` demonstrates how to implement the On-Behalf-Of (OBO) flow to call Microsoft Graph API on behalf of the authenticated user. This pattern is useful when your MCP tools need to access downstream services.
+
+To test this tool, ask Copilot a question like "Use #remote-mcp-server to provide info abou the logged-in user". Copilot will ask you to provide it consent to access the user's information by giving you a link. Navigate to the consent URL and grant the permissions. Then re-ask the question to Copilot. 
+
+### How the OBO Flow Works
+1. **Server Authentication**: Built-in authentication feature validates the user and forwards the bearer token in the `Authorization` header
+2. **Token Extraction**: The MCP tool extracts the bearer token from the request headers
+3. **Managed Identity Assertion**: A Managed Identity credential obtains an assertion token for token exchange
+4. **Token Exchange**: `OnBehalfOfCredential` exchanges the bearer token for a Microsoft Graph access token
+5. **API Call**: The tool calls Microsoft Graph's `/me` endpoint with the exchanged token
+6. **Response**: User information is returned 
+
+**Note**: This tool requires the infrastructure to be deployed to Azure. It will not work in local development without additional configuration.
 
 ### Redeployment
 
@@ -202,21 +217,10 @@ The following are some common issues that come up.
 
     This is a [known transient error](https://github.com/Azure/azure-dev/issues/5580). Try re-running `azd up`. 
 
-3. **Need admin approval. Visual Studio Code needs permission to access resources in your organization that only an admin can grant. Please ask an admin to grant permission to this app before you can use it.**
-
-    This means your Entra app hasn't authorized VS Code as a trusted client. To fix this issue, go to the Azure Portal and search for your Entra app ("MCP Authorization App") in the global search bar. Inside the Entra app resource, click on **Expose an API** in the left menu. Look for the **+ Add a client application** button. Click to add VS Code's Client ID `aebc6443-996d-45c2-90f0-388ff96faa56`, remembering to check the authorized scopes box and click **Add application**:
-
-    <img src="./media/add-vscode-id.png" width="400" alt="Add VS Code client ID screenshot">
-
-4. **Connection state: Error Error sending message to {endpoint}: TypeError: fetch failed**
-    
-    Ensure the Function app domain is correct when connecting to the server.
-
-5. **Ensure you have the latest version of Azure Functions Core Tools installed.**
+3. **Ensure you have the latest version of Azure Functions Core Tools installed.**
    
     You need [version >=4.5.0](https://learn.microsoft.com/azure/azure-functions/functions-run-local?tabs=windows%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-typescript). Check by running `func --version`.
 
-6. **`.vscode/mcp.json` must be in the root for VS Code to detect MCP server registration**
+4. **`.vscode/mcp.json` must be in the root for VS Code to detect MCP server registration**
 
     If you don't see the _Start_ button above server registrations, it's likely because `.vscode/mcp.json` isn't located in the root of your workspace folder.
-
