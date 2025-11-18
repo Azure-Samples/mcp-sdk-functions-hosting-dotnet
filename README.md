@@ -1,4 +1,4 @@
-# Host remote MCP servers built with official MCP SDKs on Azure Functions (early preview)
+# Host remote MCP servers built with official MCP SDKs on Azure Functions (public preview)
 
 This repo contains instructions and sample for running MCP server built with the C# (.NET) MCP SDK on Azure Functions. The repo uses the weather sample server to demonstrate how this can be done. You can clone to run and test the server locally, follow by easy deploy with `azd up` to have it in the cloud in a few minutes.
 
@@ -67,7 +67,7 @@ Clone the repo and open the sample in Visual Studio Code
 1. Click the tools icon and make sure **local-mcp-server** is checked for Copilot to use in the chat:
    
     <img src="./media/mcp-tools.png" width="200" alt="MCP tools list screenshot">
-1. Once the server displays the number of tools available, ask "Return the weather in NYC using #local-mcp-server" Copilot should call one of the weather tools to help answer this question.
+1. Once the server displays the number of tools available, ask "Return the weather in NYC using #local-mcp-server." Copilot should call one of the weather tools to help answer this question.
 
 ## Register resource provider before deploying
 
@@ -130,11 +130,13 @@ az provider show -n Microsoft.App
 ><img src="./media/log-level.png" width="200" alt="Log level screenshot">
 
 ## Demonstrating On-Behalf-Of (OBO) Flow
+
 The `UserInfoTools.cs` demonstrates how to implement the On-Behalf-Of (OBO) flow to call Microsoft Graph API on behalf of the authenticated user. This pattern is useful when your MCP tools need to access downstream services.
 
-To test this tool, ask Copilot a question like "Use #remote-mcp-server to provide info abou the logged-in user". Copilot will ask you to provide it consent to access the user's information by giving you a link. Navigate to the consent URL and grant the permissions. Then re-ask the question to Copilot. 
+To test this tool, ask Copilot a question like "Use #remote-mcp-server to provide info abou the logged-in user". Copilot will ask you to provide consent to access the user's information by giving you a link. Navigate to the consent URL and grant the permissions. Then re-ask the question to Copilot. 
 
 ### How the OBO Flow Works
+
 1. **Server Authentication**: Built-in authentication feature validates the user and forwards the bearer token in the `Authorization` header
 2. **Token Extraction**: The MCP tool extracts the bearer token from the request headers
 3. **Managed Identity Assertion**: A Managed Identity credential obtains an assertion token for token exchange
@@ -146,10 +148,7 @@ To test this tool, ask Copilot a question like "Use #remote-mcp-server to provid
 
 ### Redeployment
 
-If you want to redeploy the server after making changes, there are different options:
-
-1. Run `azd deploy`. (See azd command [reference](https://learn.microsoft.com/azure/developer/azure-developer-cli/reference).)
-1. Open command palette in Visual Studio Code (`Command+Shift+P/Cntrl+Shift+P`) and search for **Azure Functions: Deploy to Function App**. Then select the name of the function app to deploy to. 
+If you want to redeploy the server after making changes, run `azd deploy`. (See azd command [reference](https://learn.microsoft.com/azure/developer/azure-developer-cli/reference).)
 
 ## Built-in server authentication and authorization 
 
